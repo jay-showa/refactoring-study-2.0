@@ -8,6 +8,16 @@ export const statement = (invoice, plays) => {
     return plays[aPerformance.playID];
   }
 
+  function volumeCreditFor(perf){
+    let volumeCredits = 0
+    
+    volumeCredits += Math.max(perf.audience - 30, 0)
+    if (playFor(perf).type === 'comedy') 
+      volumeCredits += Math.floor(perf.audience / 5)
+
+    return volumeCredits;
+  }
+
   let totalAmount = 0
   let volumeCredits = 0
   let result = `청구 내역 (고객명: ${invoice.customer})\n`
@@ -18,9 +28,8 @@ export const statement = (invoice, plays) => {
   }).format
 
   for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditFor(perf);
     
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    if (playFor(perf).type === 'comedy') volumeCredits += Math.floor(perf.audience / 5)
     result += `  ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience}석)\n`
     totalAmount += amountFor(perf)
   }
