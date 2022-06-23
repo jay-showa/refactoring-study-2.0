@@ -8,14 +8,14 @@ export const statement = (invoice, plays) => {
     return plays[aPerformance.playID];
   }
 
-  function volumeCreditFor(perf){
-    let volumeCredits = 0
+  function volumeCreditFor(aPerformance){
+    let result = 0
     
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    if (playFor(perf).type === 'comedy') 
-      volumeCredits += Math.floor(perf.audience / 5)
+    result += Math.max(aPerformance.audience - 30, 0)
+    if (playFor(aPerformance).type === 'comedy') 
+      result += Math.floor(aPerformance.audience / 5)
 
-    return volumeCredits;
+    return result;
   }
 
   let totalAmount = 0
@@ -29,7 +29,7 @@ export const statement = (invoice, plays) => {
 
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditFor(perf);
-    
+
     result += `  ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience}석)\n`
     totalAmount += amountFor(perf)
   }
