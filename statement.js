@@ -32,11 +32,15 @@ export const statement = (invoice, plays) => {
   let result = `청구 내역 (고객명: ${invoice.customer})\n`
 
   for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditFor(perf);
 
     result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience}석)\n`
     totalAmount += amountFor(perf)
   }
+
+  for (let perf of invoice.performances){
+    volumeCredits += volumeCreditFor(perf);
+  }
+
   result += `총액: ${usd(totalAmount)}\n`
   result += `적립 포인트: ${volumeCredits}점\n`
   return result
