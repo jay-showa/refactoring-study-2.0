@@ -16,6 +16,7 @@ export const statement = (invoice, plays) => {
       result += Math.floor(aPerformance.audience / 5)
 
     return result;
+    
   }
 
   function usd(aNumber){
