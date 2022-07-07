@@ -8,6 +8,7 @@ class PerformanceCalculator {
     let result = 0;
     switch (this.play.type) {
       case "tragedy": {
+        throw `${this.play.type} 부모클래스에서 계산 할 수 없습니다.`;
         result = 40000;
         if (this.performance.audience > 30)
           result += 1000 * (this.performance.audience - 30);
@@ -47,7 +48,15 @@ function createPerformanceCalculator(aPerformance, aPlay) {
       throw new Error(`알 수 없는 장르 : ${aPlay.type}`);
   }
 }
-class TragedyCalculator extends PerformanceCalculator {}
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
 
 class ComedyCalculator extends PerformanceCalculator {}
 
