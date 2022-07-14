@@ -22,6 +22,7 @@ function createPerformanceCalculator(aPerformance, aPlay) {
       throw new Error(`알 수 없는 장르 : ${aPlay.type}`);
   }
 }
+
 class TragedyCalculator extends PerformanceCalculator {
   get amount() {
     let result = 40000;
@@ -68,21 +69,6 @@ export default function createStatementData(invoice, plays) {
 
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
-  }
-
-  function amountFor(aPerformance) {
-    return new PerformanceCalculator(aPerformance, playFor(aPerformance))
-      .amount;
-  }
-
-  function volumeCreditFor(aPerformance) {
-    let result = 0;
-
-    result += Math.max(aPerformance.audience - 30, 0);
-    if (aPerformance.play.type === "comedy")
-      result += Math.floor(aPerformance.audience / 5);
-
-    return result;
   }
 
   function totalVolumeCredits(data) {
