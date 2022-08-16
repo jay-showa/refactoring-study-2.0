@@ -9,3 +9,5 @@
 ## 화수목 - 유동적으로 진행
 
 ## 제이 -> 세바스찬 -> 론리 -> 벨 
+
+### [Refactoring Code Sample](https://github.com/wickedwukong/martin-fowler-refactoring-2nd/tree/3fb21791db15f7ff18257e175ce7fb28f36f1ad6/test)
