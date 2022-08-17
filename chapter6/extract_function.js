@@ -1,53 +1,46 @@
 let invoice = {
-  "orders": [
-      {"amount": 1}
-  ],
-  "customer": "JL"
-
+  orders: [{ amount: 1 }],
+  customer: "JL",
+  dueDate: "",
 };
 let Clock = {
   today: {
-      getFullYear() {
-          return 2000;
-      },
+    getFullYear() {
+      return 2000;
+    },
 
-      getMonth() {
-          return 0;
-      },
+    getMonth() {
+      return 0;
+    },
 
-      getDate() {
-          return 1;
-      }
-  }
+    getDate() {
+      return 1;
+    },
+  },
 };
 
 function printOwing(invoice) {
-    // printBanner();
+  let outstanding = 0;
 
-    // let outstanding = calculateOutstanding();
-    let outstanding = 0;
+  console.log("**************");
+  console.log("****고객 채무***");
+  console.log("**************");
 
-    console.log('**************');
-    console.log('****고객 채무***');
-    console.log('**************');
+  for (const o of invoice.orders) {
+    outstanding += o.amount;
+  }
 
-    for (const o of invoice.orders)
-    {
-        outstandining += o.amount;
-    }
+  const today = Clock.today;
 
-    const today = Clock.today;
+  invoice.dueDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 30
+  );
 
-    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
-
-    console.log(`고객명 : ${invoice.customer}`);
-    console.log(`채무액 : ${outstanding}`);
-    console.log(`고객명 : ${invoice.dueDate.toLocalDateString()}`);
-
-
-    
-    
+  console.log(`고객명 : ${invoice.customer}`);
+  console.log(`채무액 : ${outstanding}`);
+  console.log(`마감일 : ${invoice.dueDate.toLocaleDateString()}`);
 }
 
-
-printOwing(invoices)
+printOwing(invoice);
