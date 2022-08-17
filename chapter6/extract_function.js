@@ -1,11 +1,25 @@
-import fs from "fs";
-import { resolve } from "path";
-const basePath = resolve();
+let invoice = {
+  "orders": [
+      {"amount": 1}
+  ],
+  "customer": "JL"
 
-export const readJSON = (path) =>
-  JSON.parse(fs.readFileSync(resolve(basePath, path), "utf-8"));
+};
+let Clock = {
+  today: {
+      getFullYear() {
+          return 2000;
+      },
 
-const invoices = readJSON("invoices.json");
+      getMonth() {
+          return 0;
+      },
+
+      getDate() {
+          return 1;
+      }
+  }
+};
 
 function printOwing(invoice) {
     // printBanner();
